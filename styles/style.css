@@ -1,0 +1,71 @@
+#svg-map
+{
+  width:  100%;
+}
+
+
+#rayons
+{
+  width:  20%;
+  float:  left;
+}
+
+#map
+{
+  width:  40%;
+  float:  left;
+}
+#info
+{
+  width:  30%;
+  margin-left: 5%;
+  float:  left;
+}
+
+#zagl
+{
+  text-align: center;
+  margin:  10px 0 30px 0;
+  font-family: 'Roboto', sans-serif;
+  color: #191970;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#zagl_info
+{
+  text-align: center;
+  margin:  10px 0 30px 0;
+  font-family: 'Roboto', sans-serif;
+  color: #191970;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#text_info
+{
+  color: #191970; 
+  display: block; 
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px; 
+}
+
+#text_info p
+{
+  margin-top: 20px;
+}
+
+#vertical_menu
+{
+     overflow: auto;
+}
+
+#vertical_menu a
+{
+    color: #191970; 
+    display: block; 
+    padding: 4px 12px 4px 12px; 
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px; 
+}
