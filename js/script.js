@@ -12,6 +12,25 @@ var clck; //выбранный объект
 var status = ["path3013", "path3153", "path3155"];   //статус района
 
 
+
+
+/***************рисование круга**********************************/
+$.each(arr_elem,function(index,value){												//перебор элементов массива
+var coord = svgDocument.getElementById(value).getBoundingClientRect();      //координаты района
+$('#map').append("<div id="+value+" class='circle'><p>10</p></div>");
+$("#"+value+".circle").css({'position':'absolute','top':coord.top+coord.height/4, 'left':coord.left+coord.width/2});
+//console.log(#path3163.circle);
+});
+$('.circle').css({'backgroundColor':'#FF8000', 'width':'30px', 'height':'30px', 'position':'absolute', 'border-radius':'15px', 'text-align':'center', 'color': 'white'});
+$('.circle p').css({'margin-top': '5px'});
+
+
+/***************************************************************/
+
+
+
+
+
 /*********************подсветка в списке*******************/
 function choice_spisok(el_id, col)     //(id эл-та, цвет)
 {
@@ -170,5 +189,7 @@ function change_raion(el_id)
  $(vertical_menu).height(map_height - $(zagl).height() - 40);    //высота карты - заголовок - margin
  $(info).height($(map).height());
  /***************************************************************/
+
+
 
 });
