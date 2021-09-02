@@ -1,12 +1,12 @@
 var arr_elem = ["path3013", "path3023", "path3033", "path3035", "path3049", "path3053", "path3055", "path3069", "path3119", "path3129", "path3139", "path3141", "path3143", "path3145", "path3147", "path3149", "path3151", "path3153", "path3155", "path3157", "path3159", "path3161", "path3163"]; //массив активных элементов
-$(window).on('load', function(){ 
+$('#svg-map').on('load', function(){ 
 var object = document.getElementById("svg-map");
 var svgDocument = object.contentDocument;
 var path_elem = svgDocument.getElementsByTagName("path");
 var end_elem;
 var flag; //объект выделен
 var clck; //выбранный объект
-
+var region_flag = false; //выбран район
 
 
 var status = ["path3013", "path3153", "path3155"];   //статус района
@@ -19,11 +19,37 @@ $.each(arr_elem,function(index,value){												//перебор элемен�
 var coord = svgDocument.getElementById(value).getBoundingClientRect();      //координаты района
 $('#map').append("<div id="+value+" class='circle'><p>10</p></div>");
 $("#"+value+".circle").css({'position':'absolute','top':coord.top+coord.height/4, 'left':coord.left+coord.width/2});
-//console.log(#path3163.circle);
 });
 $('.circle').css({'backgroundColor':'#FF8000', 'width':'30px', 'height':'30px', 'position':'absolute', 'border-radius':'15px', 'text-align':'center', 'color': 'white'});
 $('.circle p').css({'margin-top': '5px'});
 
+
+/***************************************************************/
+
+/********************Клик по кругу******************************/
+ $(".circle").click(function() {
+ 	$('.circle').css({'opacity': '0', 'pointer-events' : 'none'});
+ 	$("#svg-map").attr("data", "img/"+ $(this).attr("id") +".svg");
+ 	region_flag = true;
+ 	$("#back").css({'width': '10%'});
+
+	    });
+
+/***************************************************************/
+
+/********************Клик по кнопке "Назад"******************************/
+	 $("#back").click(function() {
+ 	$('.circle').css({'opacity': '1', 'pointer-events' : 'auto'});
+ 	$("#svg-map").attr("data", "img/map.svg");
+ 	region_flag = false;
+ 	$("#back").css({'width': '0px'});
+
+ 	window.onload = function(){
+ 	object = document.getElementById("svg-map");
+	svgDocument = object.contentDocument;
+	path_elem = svgDocument.getElementsByTagName("path");
+	}
+	    });
 
 /***************************************************************/
 
@@ -57,13 +83,15 @@ function change_raion(el_id)
 
 /*************************Выбор в списке******************************************/
  $(".rn").hover(function(e){ //попадание на элемент
+
  	end_elem = $(e.target).attr("id");
- 	
  		flag = true;
  		if($.inArray($(e.target).attr("id"), status) >= 0)
  		{
+ 			
  			choice_spisok($(e.target).attr("id"), "red");
  			$(svgDocument.getElementById($(e.target).attr("id"))).css("fill", "red");
+
  		}
  		else
  		{
@@ -95,9 +123,6 @@ function change_raion(el_id)
 /*************************Выбор на карте******************************************/
  $(path_elem).hover(function(e){ //попадание на элемент
 	   
-
-
-
  	if($.inArray($(e.target).attr("id"), arr_elem) >= 0)  //если элемент входит в массив
  	{
  		 	end_elem = svgDocument.getElementById($(e.target).attr("id"));
@@ -138,6 +163,7 @@ function change_raion(el_id)
 
   /*************************Клик по списку******************************************/
  $(".rn").click(function() {
+ 	if(!region_flag){
  	if(clck)
  	{
  		$(svgDocument.getElementById(clck)).css("fill", "#fefee9");
@@ -153,7 +179,11 @@ function change_raion(el_id)
  			$(svgDocument.getElementById($(this).attr("id"))).css("fill", "green");
  		}
  	change_raion(clck);
- 	
+ 	}
+ 	else   //если выбран район
+ 	{
+ 		$("#svg-map").attr("data", "img/"+ $(this).attr("id") +".svg");
+ 	}
 
 	    });
  /*********************************************************************************/
@@ -191,5 +221,5 @@ function change_raion(el_id)
  /***************************************************************/
 
 
-
 });
+
